@@ -11,16 +11,18 @@ import org.springframework.statemachine.StateMachine;
 @SpringBootApplication
 public class SpringStatemachineLearnApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringStatemachineLearnApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringStatemachineLearnApplication.class, args);
+    }
 
-	@Autowired
-	private StateMachine<StateEnum, EventEnum> stateMachine;
-	@Override
-	public void run(String... args) throws Exception {
-		stateMachine.start();
-		stateMachine.sendEvent(EventEnum.PAY);
-		stateMachine.sendEvent(EventEnum.RECEIVE);
-	}
+    @Autowired
+    private StateMachine<StateEnum, EventEnum> stateMachine;
+
+    @Override
+    public void run(String... args) throws Exception {
+        stateMachine.start();
+        //stateMachine.sendEvent(EventEnum.PAY);
+        //stateMachine.sendEvent(EventEnum.RECEIVE);
+    }
 }
+
