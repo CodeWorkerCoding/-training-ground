@@ -77,7 +77,7 @@ public class CommonMachineProcessor {
 
         msgContextDo.setMachineId(UUIdHelper.uuid());
 
-        StateMachineConfig config = machineConfigList.get(0);
+        StateMachineConfig config = this.stateMachineConfigService.findByCategorySourceAndEvent(machineCategory, INIT_STATE.getState(), null);
         MachineStateEunm sourceState = config.getSourceState();
         Message event = MessageBuilder.withPayload(config.getEvent())
                 .setHeader("executeParam", msgContextDo)
@@ -94,7 +94,7 @@ public class CommonMachineProcessor {
                         )));
         stateMachine.start();
         stateMachine.sendEvent(event);
-        return "";
+        return msgContextDo.getMachineId();
     }
 
     private StateMachine<MachineStateEunm, MachineEventEnum> assembleMachine(List<StateMachineConfig> configList) throws Exception {
