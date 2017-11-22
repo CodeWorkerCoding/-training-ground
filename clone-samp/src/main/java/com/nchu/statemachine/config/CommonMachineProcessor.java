@@ -2,6 +2,8 @@ package com.nchu.statemachine.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nchu.statemachine.dto.MQContextDo;
+import com.nchu.statemachine.dto.MsgContextDo;
+import com.nchu.statemachine.helper.UUIdHelper;
 import com.nchu.statemachine.model.enums.MachineEventEnum;
 import com.nchu.statemachine.model.enums.MachineStateEunm;
 import com.nchu.statemachine.model.pojo.StateMachineConfig;
@@ -10,12 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.access.StateMachineAccess;
 import org.springframework.statemachine.access.StateMachineFunction;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.model.StateData;
 import org.springframework.statemachine.state.State;
+import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.statemachine.support.StateMachineInterceptor;
 import org.springframework.statemachine.support.StateMachineInterceptorAdapter;
 import org.springframework.statemachine.transition.Transition;
@@ -53,8 +57,8 @@ public class CommonMachineProcessor {
 
 
     public String startMachine(Object executeContext) throws Exception {
-        MQContextDo mqContextDo = (MQContextDo) executeContext;
-        String machineCategory = mqContextDo.getMachineCategory().getCategory();
+        MsgContextDo msgContextDo = (MsgContextDo) executeContext;
+        String machineCategory = msgContextDo.getMachineCategory();
         List<StateMachineConfig> machineConfigList = this.stateMachineConfigService.findByStateCategory(machineCategory);
         stateMachine = assembleMachine(machineConfigList);
 
@@ -71,6 +75,25 @@ public class CommonMachineProcessor {
             }
         });
 
+        msgContextDo.setMachineId(UUIdHelper.uuid());
+
+        StateMachineConfig config = machineConfigList.get(0);
+        MachineStateEunm sourceState = config.getSourceState();
+        Message event = MessageBuilder.withPayload(config.getEvent())
+                .setHeader("executeParam", msgContextDo)
+                .setHeader("machineId", msgContextDo.getMachineId())
+                .setHeader("machineCategory", config.getMachineCategory())
+                .setHeader("auto", false)
+                .build();
+
+        stateMachine.stop();
+        stateMachine.getStateMachineAccessor()
+                .doWithAllRegions(access-> access.resetStateMachine(
+                        new DefaultStateMachineContext<MachineStateEunm, MachineEventEnum>(
+                                sourceState, null, null, null
+                        )));
+        stateMachine.start();
+        stateMachine.sendEvent(event);
         return "";
     }
 

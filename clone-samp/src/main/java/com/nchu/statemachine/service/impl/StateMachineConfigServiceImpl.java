@@ -11,9 +11,7 @@ import com.nchu.statemachine.service.StateMachineConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author fujianjian
@@ -26,6 +24,32 @@ public class StateMachineConfigServiceImpl implements StateMachineConfigService 
 
     //@Autowired
     //private StateMachineConfigRepository stateMachineConfigRepository;
+
+    private static Map<MachineEventEnum, StateMachineConfig> tempMap = new HashMap<>();
+
+    static {
+        StateMachineConfig.StateMachineConfigBuilder configBuilder = StateMachineConfig.builder();
+        tempMap.put(MachineEventEnum.SUBMIT_WASH, configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
+                .sourceState(MachineStateEunm.INIT).targetState(MachineStateEunm.DIRTY).event(MachineEventEnum.SUBMIT_WASH)
+                .executorContext(ExecutorContextEnum.SUBMIT_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.SUBMIT_WASH_EXECUTE.getExecutorMethod())
+                .build());
+        tempMap.put(MachineEventEnum.PRE_WASH, configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
+                .sourceState(MachineStateEunm.DIRTY).targetState(MachineStateEunm.WET).event(MachineEventEnum.PRE_WASH)
+                .executorContext(ExecutorContextEnum.PRE_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.PRE_WASH_EXECUTE.getExecutorMethod())
+                .build());
+        tempMap.put(MachineEventEnum.WASHING, configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
+                .sourceState(MachineStateEunm.WET).targetState(MachineStateEunm.CLEAN).event(MachineEventEnum.WASHING)
+                .executorContext(ExecutorContextEnum.WASHING_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.WASHING_EXECUTE.getExecutorMethod())
+                .build());
+        tempMap.put(MachineEventEnum.DRY, configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
+                .sourceState(MachineStateEunm.CLEAN).targetState(MachineStateEunm.DRYING).event(MachineEventEnum.DRY)
+                .executorContext(ExecutorContextEnum.DRY_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.DRY_EXECUTE.getExecutorMethod())
+                .build());
+        tempMap.put(MachineEventEnum.POST_WASH, configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
+                .sourceState(MachineStateEunm.DRYING).targetState(MachineStateEunm.DONE).event(MachineEventEnum.POST_WASH)
+                .executorContext(ExecutorContextEnum.POST_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.POST_WASH_EXECUTE.getExecutorMethod())
+                .build());
+    }
 
     @Override
     public StateMachineConfig findById(String s) {
@@ -59,32 +83,13 @@ public class StateMachineConfigServiceImpl implements StateMachineConfigService 
     @Override
     public List<StateMachineConfig> findByStateCategory(String machineCategory) {
         List<StateMachineConfig> list = new ArrayList<>();
-        StateMachineConfig.StateMachineConfigBuilder configBuilder = StateMachineConfig.builder();
-        list.add(configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
-                .sourceState(MachineStateEunm.INIT).targetState(MachineStateEunm.DIRTY).event(MachineEventEnum.SUBMIT_WASH)
-                .executorContext(ExecutorContextEnum.SUBMIT_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.SUBMIT_WASH_EXECUTE.getExecutorMethod())
-                .build());
-        list.add(configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
-                .sourceState(MachineStateEunm.DIRTY).targetState(MachineStateEunm.WET).event(MachineEventEnum.PRE_WASH)
-                .executorContext(ExecutorContextEnum.PRE_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.PRE_WASH_EXECUTE.getExecutorMethod())
-                .build());
-        list.add(configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
-                .sourceState(MachineStateEunm.WET).targetState(MachineStateEunm.CLEAN).event(MachineEventEnum.WASHING)
-                .executorContext(ExecutorContextEnum.WASHING_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.WASHING_EXECUTE.getExecutorMethod())
-                .build());
-        list.add(configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
-                .sourceState(MachineStateEunm.CLEAN).targetState(MachineStateEunm.DRYING).event(MachineEventEnum.DRY)
-                .executorContext(ExecutorContextEnum.DRY_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.DRY_EXECUTE.getExecutorMethod())
-                .build());
-        list.add(configBuilder.machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory())
-                .sourceState(MachineStateEunm.DRYING).targetState(MachineStateEunm.DONE).event(MachineEventEnum.POST_WASH)
-                .executorContext(ExecutorContextEnum.POST_WASH_EXECUTE.getExecutorContext()).executorMethod(ExecutorContextEnum.POST_WASH_EXECUTE.getExecutorMethod())
-                .build());
+        tempMap.forEach((k,v) -> list.add(v));
         return list;
     }
 
     @Override
     public StateMachineConfig findByCategorySourceAndEvent(String category, MachineStateEunm source, MachineEventEnum event) {
-        return null;
+        StateMachineConfig stateMachineConfig = tempMap.get(event);
+        return stateMachineConfig;
     }
 }

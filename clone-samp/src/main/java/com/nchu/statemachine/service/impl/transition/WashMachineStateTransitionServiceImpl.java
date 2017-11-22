@@ -19,22 +19,22 @@ public class WashMachineStateTransitionServiceImpl implements WashMachineStateTr
 
 
     public void submitWash(Object executeParam) {
-
+        log.info("submit wash clothes tast, param:{}", executeParam);
     }
 
     public void pourWater(Object executeParam) {
-
+        log.info("pouring water for wash clothes task, param:{}", executeParam);
     }
 
     public void washColthes(Object executeParam) {
-
+        log.info("doing wash clothes task, param:{}", executeParam);
     }
 
     public void dryColthes(Object executeParam) {
-
+        log.info("doing dry clothes task, param:{}", executeParam);
     }
 
     public void airColthes(Object executeParam) {
-
+        log.info("start air clothes task, param:{}", executeParam);
     }
 }

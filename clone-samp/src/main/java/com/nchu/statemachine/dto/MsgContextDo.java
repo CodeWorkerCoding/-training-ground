@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MsgContextDo {
 
+    private Object executeParam;
+
     private String machineId;
 
     private String machineCategory;

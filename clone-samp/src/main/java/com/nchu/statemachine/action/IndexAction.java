@@ -2,6 +2,7 @@ package com.nchu.statemachine.action;
 
 import com.nchu.statemachine.config.CommonMachineProcessor;
 import com.nchu.statemachine.dto.MQContextDo;
+import com.nchu.statemachine.dto.MsgContextDo;
 import com.nchu.statemachine.model.enums.MachineCategoryEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class IndexAction {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index() throws Exception {
-        MQContextDo context = MQContextDo.builder().machineCategory(MachineCategoryEnum.WASH_MACHINE).build();
-        this.commonMachineProcessor.startMachine(context);
+        MsgContextDo msgContextDo = MsgContextDo.builder().machineCategory(MachineCategoryEnum.WASH_MACHINE.getCategory()).build();
+        this.commonMachineProcessor.startMachine(msgContextDo);
         return "success";
     }
 }
