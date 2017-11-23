@@ -1,5 +1,6 @@
 package com.nchu.learn;
 
+import com.nchu.learn.aware.JianjianBeanNameService;
 import com.nchu.learn.model.enums.EventEnum;
 import com.nchu.learn.model.enums.StateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,12 @@ public class SpringStatemachineLearnApplication implements CommandLineRunner {
     @Autowired
     private StateMachine<StateEnum, EventEnum> stateMachine;
 
+    @Autowired
+    private JianjianBeanNameService jianjianBeanNameService;
     @Override
     public void run(String... args) throws Exception {
-        stateMachine.start();
+        System.out.println(jianjianBeanNameService.getBeanName());
+        //stateMachine.start();
         //stateMachine.sendEvent(EventEnum.PAY);
         //stateMachine.sendEvent(EventEnum.RECEIVE);
     }

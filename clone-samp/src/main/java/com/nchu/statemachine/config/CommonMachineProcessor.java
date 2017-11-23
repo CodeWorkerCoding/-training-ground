@@ -16,8 +16,10 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.access.StateMachineAccess;
 import org.springframework.statemachine.access.StateMachineFunction;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.model.StateData;
+import org.springframework.statemachine.monitor.StateMachineMonitor;
 import org.springframework.statemachine.state.State;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
 import org.springframework.statemachine.support.StateMachineInterceptor;
@@ -64,14 +66,27 @@ public class CommonMachineProcessor {
 
         stateMachine.getStateMachineAccessor().doWithAllRegions(new StateMachineFunction<StateMachineAccess<MachineStateEunm, MachineEventEnum>>() {
             @Override
-            public void apply(StateMachineAccess<MachineStateEunm, MachineEventEnum> function) {
-                function.addStateMachineInterceptor(new StateMachineInterceptorAdapter<MachineStateEunm, MachineEventEnum>(){
+            public void apply(StateMachineAccess<MachineStateEunm, MachineEventEnum> access) {
+                access.addStateMachineInterceptor(new StateMachineInterceptorAdapter<MachineStateEunm, MachineEventEnum>(){
                     @Override
                     public void preStateChange(State<MachineStateEunm, MachineEventEnum> state, Message<MachineEventEnum> message,
                                                Transition<MachineStateEunm, MachineEventEnum> transition, StateMachine<MachineStateEunm, MachineEventEnum> stateMachine) {
                         commonStateMachineListener.onStateChange(state, message, transition, stateMachine);
-                    }
+                }
                 });
+
+                //access.addStateMachineMonitor(new StateMachineMonitor<MachineStateEunm, MachineEventEnum>() {
+                //    @Override
+                //    public void transition(StateMachine<MachineStateEunm, MachineEventEnum> stateMachine,
+                //                           Transition<MachineStateEunm, MachineEventEnum> transition, long duration) {
+                //
+                //    }
+                //
+                //    @Override
+                //    public void action(StateMachine<MachineStateEunm, MachineEventEnum> stateMachine, Action<MachineStateEunm, MachineEventEnum> action, long duration) {
+                //
+                //    }
+                //});
             }
         });
 
