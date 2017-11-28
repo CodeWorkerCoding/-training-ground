@@ -6,7 +6,9 @@
 
     <groupId>com.nchu.learn</groupId>
     <artifactId>self-learn</artifactId>
-    <version>${self-lean-version}</version>
+    <version>1.0.0</version>
+    <!--<version>${self-lean-version}</version>-->
+    <packaging>pom</packaging>
 
     <properties>
         <self-lean-version>1.0.0</self-lean-version>

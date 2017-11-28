@@ -5,7 +5,8 @@
 
 	<groupId>com.nchu.learn</groupId>
 	<artifactId>spring-statemachine-learn</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
+    <!--<version>${self-lean-version}</version>-->
 	<packaging>jar</packaging>
 
 	<name>spring-statemachine-learn</name>
@@ -14,7 +15,8 @@
 	<parent>
 		<groupId>com.nchu.learn</groupId>
 		<artifactId>self-learn</artifactId>
-		<version>${self-lean-version}</version>
+		<version>1.0.0</version>
+		<!--<version>${self-lean-version}</version>-->
 	</parent>
 
 	<properties>
@@ -28,6 +30,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 		<!--spring state machine-->
 		<dependency>
 			<groupId>org.springframework.statemachine</groupId>
