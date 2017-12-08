@@ -19,6 +19,8 @@
         <module>spring-statemachine-learn</module>
         <!--clone from samp project-->
         <module>clone-samp</module>
+        <!--boot 集成swagger2-->
+        <module>boot-swagger2</module>
     </modules>
 
     <parent>
