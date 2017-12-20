@@ -12,6 +12,7 @@
 
     <properties>
         <self-lean-version>1.0.0</self-lean-version>
+        <mybatis-generator-version>1.3.5</mybatis-generator-version>
     </properties>
 
     <modules>
@@ -21,6 +22,7 @@
         <module>clone-samp</module>
         <!--boot 集成swagger2-->
         <module>boot-swagger2</module>
+        <module>mybatis-generator</module>
     </modules>
 
     <parent>

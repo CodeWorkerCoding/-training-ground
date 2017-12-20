@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mybatis-generator</artifactId>
+
+    <name>mybatis-auto-generator</name>
+    <description>use mybatis tools to auto generator domain class, mapper file</description>
+
+    <parent>
+        <artifactId>self-learn</artifactId>
+        <groupId>com.nchu.learn</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <properties>
+        <mybatis-generator-xml-config>${basedir}/src/main/resources/mybatis/auto-generator.xml
+        </mybatis-generator-xml-config>
+        <mybatis-generator-config-properties>
+            file:///${basedir}/src/main/resources/mybatis/auto-generator-config.properties
+        </mybatis-generator-config-properties>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis-generator-version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+       <!-- <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>-->
+
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mybatis-generator-version}</version>
+                <configuration>
+                    <configurationFile>${mybatis-generator-xml-config}</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
