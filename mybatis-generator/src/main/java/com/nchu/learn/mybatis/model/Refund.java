@@ -56,7 +56,7 @@ public class Refund {
 
     private BigDecimal outputRefundPrincipal;
 
-    private BigDecimal outputRefundInterest;
+    private Double outputRefundInterest;
 
     private Date createdTime;
 
@@ -274,11 +274,11 @@ public class Refund {
         this.outputRefundPrincipal = outputRefundPrincipal;
     }
 
-    public BigDecimal getOutputRefundInterest() {
+    public Double getOutputRefundInterest() {
         return outputRefundInterest;
     }
 
-    public void setOutputRefundInterest(BigDecimal outputRefundInterest) {
+    public void setOutputRefundInterest(Double outputRefundInterest) {
         this.outputRefundInterest = outputRefundInterest;
     }
 

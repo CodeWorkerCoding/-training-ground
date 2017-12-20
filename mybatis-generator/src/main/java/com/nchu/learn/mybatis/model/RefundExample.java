@@ -1846,52 +1846,52 @@ public class RefundExample {
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestEqualTo(BigDecimal value) {
+        public Criteria andOutputRefundInterestEqualTo(Double value) {
             addCriterion("output_refund_interest =", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestNotEqualTo(BigDecimal value) {
+        public Criteria andOutputRefundInterestNotEqualTo(Double value) {
             addCriterion("output_refund_interest <>", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestGreaterThan(BigDecimal value) {
+        public Criteria andOutputRefundInterestGreaterThan(Double value) {
             addCriterion("output_refund_interest >", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andOutputRefundInterestGreaterThanOrEqualTo(Double value) {
             addCriterion("output_refund_interest >=", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestLessThan(BigDecimal value) {
+        public Criteria andOutputRefundInterestLessThan(Double value) {
             addCriterion("output_refund_interest <", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andOutputRefundInterestLessThanOrEqualTo(Double value) {
             addCriterion("output_refund_interest <=", value, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestIn(List<BigDecimal> values) {
+        public Criteria andOutputRefundInterestIn(List<Double> values) {
             addCriterion("output_refund_interest in", values, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestNotIn(List<BigDecimal> values) {
+        public Criteria andOutputRefundInterestNotIn(List<Double> values) {
             addCriterion("output_refund_interest not in", values, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOutputRefundInterestBetween(Double value1, Double value2) {
             addCriterion("output_refund_interest between", value1, value2, "outputRefundInterest");
             return (Criteria) this;
         }
 
-        public Criteria andOutputRefundInterestNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOutputRefundInterestNotBetween(Double value1, Double value2) {
             addCriterion("output_refund_interest not between", value1, value2, "outputRefundInterest");
             return (Criteria) this;
         }
