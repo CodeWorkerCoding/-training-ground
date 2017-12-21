@@ -39,8 +39,11 @@
         <!--对应数据库表名 -->
         <!--<table tableName="sys_user" domainObjectName="User"/>-->
 
-        <table tableName="sm_fund_refund" domainObjectName="Refund" enableSelectByPrimaryKey="true">
+        <!--<table tableName="sm_fund_refund" domainObjectName="Refund" enableSelectByPrimaryKey="true">
             <columnOverride column="output_refund_interest" javaType="java.lang.Double"/>
-        </table>
+        </table>-->
+
+
+        <table tableName="sm_fund" domainObjectName="Fund"/>
     </context>
 </generatorConfiguration>
