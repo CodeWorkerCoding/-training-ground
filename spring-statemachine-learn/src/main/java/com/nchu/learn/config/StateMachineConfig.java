@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
+import org.springframework.statemachine.config.builders.StateMachineConfigBuilder;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
@@ -18,16 +19,19 @@ import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import java.util.EnumSet;
 
 /**
+ * 状态机官方配置
+ *
  * @author fujianjian
  * @project self-learn
  * @date 2017/11/14 19:06
  */
-@Configuration
-@EnableStateMachine
+//@Configuration
+//@EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<StateEnum, EventEnum> {
 
+
     Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
+    //@Autowired
     private SelfStateMachineListenerAdapter selfStateMachineListenerAdapter;
 
     @Override
@@ -43,32 +47,8 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<StateE
                 .event(EventEnum.RECEIVE);
     }
 
-
     @Override
     public void configure(StateMachineConfigurationConfigurer<StateEnum, EventEnum> config) throws Exception {
         config.withConfiguration().listener(selfStateMachineListenerAdapter);
-    }
-
-    @Bean
-    public StateMachineListener<StateEnum, EventEnum> listener() {
-        return new StateMachineListenerAdapter<StateEnum, EventEnum>() {
-            //@Override
-            //public void transition(Transition<StateEnum, EventEnum> transition) {
-            //    if (transition.getTarget().getId() == StateEnum.UNPAID) {
-            //        logger.info("订单创建，待支付");
-            //        return;
-            //    }
-            //    if (transition.getSource().getId() == StateEnum.UNPAID
-            //            && transition.getTarget().getId() == StateEnum.WAIT_FOR_RECEIVE) {
-            //        logger.info("用户完成支付，待收货");
-            //        return;
-            //    }
-            //    if (transition.getSource().getId() == StateEnum.WAIT_FOR_RECEIVE
-            //            && transition.getTarget().getId() == StateEnum.DONE) {
-            //        logger.info("用户已收货，订单完成");
-            //        return;
-            //    }
-            //}
-        };
     }
 }

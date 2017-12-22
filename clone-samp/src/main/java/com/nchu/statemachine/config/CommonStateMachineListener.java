@@ -1,6 +1,7 @@
 package com.nchu.statemachine.config;
 
 import com.nchu.statemachine.dto.MsgContextDo;
+import com.nchu.statemachine.helper.ApplicationContextHelper;
 import com.nchu.statemachine.model.enums.ExecutorContextEnum;
 import com.nchu.statemachine.model.enums.MachineEventEnum;
 import com.nchu.statemachine.model.enums.MachineStateEunm;
@@ -23,6 +24,7 @@ import java.lang.reflect.Method;
 
 /**
  * 统一状态机状态变更监听器
+ *
  * @author fujianjian
  * @project self-learn
  * @date 2017/11/21 11:40
@@ -32,13 +34,10 @@ import java.lang.reflect.Method;
 public class CommonStateMachineListener {
 
     @Autowired
-    private ApplicationContext applicationContext;
-
-    @Autowired
     private StateMachineConfigService stateMachineConfigService;
 
     public void onStateChange(State<MachineStateEunm, MachineEventEnum> state, Message<MachineEventEnum> message,
-                              Transition<MachineStateEunm, MachineEventEnum> transition, StateMachine<MachineStateEunm,MachineEventEnum> stateMachine) {
+                              Transition<MachineStateEunm, MachineEventEnum> transition, StateMachine<MachineStateEunm, MachineEventEnum> stateMachine) {
         MessageHeaders messageHeader = message.getHeaders();
         MsgContextDo msgContextDo = messageHeader.get("executeParam", MsgContextDo.class);
 
@@ -47,7 +46,7 @@ public class CommonStateMachineListener {
 
         StateMachineConfig config = stateMachineConfigService.findByCategorySourceAndEvent(msgContextDo.getMachineCategory(), source, event);
 
-        Object object = applicationContext.getBean(config.getExecutorContext());
+        Object object = ApplicationContextHelper.getBean(config.getExecutorContext());
         Method method = ReflectionUtils.findMethod(object.getClass(), config.getExecutorMethod(), Object.class);
         Object retParam = ReflectionUtils.invokeMethod(method, object, msgContextDo.getExecuteParam());
         log.info("class [{}] method [{}] execute result [{}]", config.getExecutorContext(), config.getExecutorMethod(), retParam);

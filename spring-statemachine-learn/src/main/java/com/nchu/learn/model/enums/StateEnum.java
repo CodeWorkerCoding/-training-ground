@@ -8,7 +8,14 @@ package com.nchu.learn.model.enums;
  * @date 2017/11/14 18:59
  */
 public enum StateEnum {
+
+    INIT,
+
     UNPAID,
     WAIT_FOR_RECEIVE,
     DONE,
+
+    END,
+
+    ;
 }
