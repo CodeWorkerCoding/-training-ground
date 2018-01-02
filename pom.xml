@@ -21,8 +21,9 @@
         <!--clone from samp project-->
         <module>clone-samp</module>
         <!--boot 集成swagger2-->
-        <module>boot-swagger2</module>
+        <!--<module>boot-swagger2</module>-->
         <module>mybatis-generator</module>
+        <module>spring-hessian-learn</module>
     </modules>
 
     <parent>
