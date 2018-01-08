@@ -25,7 +25,7 @@ public class TemplateManager implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        DTOClassTemp();
+        //DTOClassTemp();
     }
 
     private void DemoTemp() throws Exception {
