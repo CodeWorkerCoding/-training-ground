@@ -13,6 +13,6 @@ public class IndexAction {
 
     @GetMapping("/index")
     public String index() {
-        return "index_bootdo";
+        return "index_boot";
     }
 }

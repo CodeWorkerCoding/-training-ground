@@ -6,6 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-freemark-learn</artifactId>
     <description>spring boot freemark</description>
+    <packaging>war</packaging>
     <parent>
         <artifactId>self-learn</artifactId>
         <groupId>com.nchu.learn</groupId>
