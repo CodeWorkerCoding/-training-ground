@@ -14,7 +14,7 @@
 <body>
 <div class="container-fluid">
     <h1 class="page-header">新增实体模型</h1>
-    <form class="form-horizontal" name="genCodeForm" action="" method="post">
+    <form class="form-horizontal" name="genCodeForm" action="/enity/doing/gen" method="post" id="genCodeForm">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="packageName">包名</label>
             <div class="col-sm-4">
@@ -36,26 +36,6 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="fieldList">字段</label>
             <div class="col-sm-10" id="fieldList">
-                <!--<div class="form-group">
-                    <div class="col-sm-2">
-                        <input type="text" name="commonField[0].fieldName" placeholder="字段名" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="text" name="commonField[0].fieldDesc" placeholder="字段描述" class="form-control"/>
-                    </div>
-                    <div class="col-sm-2">
-                        <select name="commonField[0].fieldType" placeholder="字段类型" class="form-control">
-                            <option value="">请选择字段类型</option>
-                            <option th:each="fieldTypeEnum:${fieldTypeList}" th:value="${fieldTypeEnum.name()}" th:text="${fieldTypeEnum.appearType}"/>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <select type="text" name="commonField[0].necessary" placeholder="是否必要" class="form-control">
-                            <option value="">是否必填</option>
-                            <option th:each="necessaryEnum:${necessaryList}" th:value="${necessaryEnum.name()}" th:text="${necessaryEnum.desc}"/>
-                        </select>
-                    </div>
-                </div>-->
             </div>
         </div>
 
@@ -63,36 +43,78 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-primary">提交</button>
                 <button type="button" class="btn btn-primary" th:onclick="'javascript:addOneField()'">加字段</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="viewGenCodeRusult()">预览结果</button>
             </div>
         </div>
     </form>
+    <div class="modal fade" tabindex="-1" role="dialog" id="genResultModal" aria-labelledby="genResultModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="genResultModalLabel">代码生成预览</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="genCodeResult" disabled="disabled"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">了解,请关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
+<style type="text/css">
+    #genCodeResult {
+        margin: 0px;
+        width: 574px;
+        height: 715px;
+    }
+</style>
 <script type="text/javascript" th:inline="javascript">
     var fieldCount = 0;
     function addOneField() {
         console.log(fieldCount);
         $("#fieldList").append('<div class="form-group">' +
             '<div class="col-sm-2">' +
-            '<input type="text" name="commonField[' + fieldCount + '].fieldName" placeholder="字段名" class="form-control"/>' +
+            '<input type="text" name="fieldList[' + fieldCount + '].fieldName" placeholder="字段名" class="form-control"/>' +
             '</div>' +
             '<div class="col-sm-2">' +
-            '<input type="text" name="commonField[' + fieldCount + '].fieldDesc" placeholder="字段描述" class="form-control"/>' +
+            '<input type="text" name="fieldList[' + fieldCount + '].fieldDesc" placeholder="字段描述" class="form-control"/>' +
             '</div>' +
             '<div class="col-sm-2">' +
-            '<select name="commonField[' + fieldCount + '].fieldType" placeholder="字段类型" class="form-control">' +
+            '<select name="fieldList[' + fieldCount + '].fieldType" placeholder="字段类型" class="form-control">' +
             '<option value="">请选择字段类型</option>' +
             '<option th:each="fieldTypeEnum:${fieldTypeList}" th:value="${fieldTypeEnum.name()}" th:text="${fieldTypeEnum.appearType}"/>' +
             '</select>' +
             '</div>' +
             '<div class="col-sm-2">' +
-            '<select type="text" name="commonField[' + fieldCount + '].necessary" placeholder="是否必要" class="form-control">' +
+            '<select name="fieldList[' + fieldCount + '].necessary" placeholder="是否必要" class="form-control">' +
             '<option value="">是否必填</option>' +
             '<option th:each="necessaryEnum:${necessaryList}" th:value="${necessaryEnum.name()}" th:text="${necessaryEnum.desc}"/>' +
             '</select>' +
             '</div>' +
             '</div>');
         fieldCount++;
+    }
+
+    function viewGenCodeRusult() {
+        console.log('executing it!!!!');
+//        $('#genResultModal').modal('toggle');
+        var paramData = {};
+        // 获取Form表单中所有数据
+        var paramForm = $('#genCodeForm').serializeArray();
+        console.log(paramForm);
+        $.each(paramForm, function () { paramData[this.name] = this.value;});
+        console.log(paramData);
+        $.post('/enity/doing/gen', paramData, function (data) {
+            $('#genCodeResult').val(data);
+            $('#genResultModal').modal('toggle');
+        })
     }
 </script>
 </html>

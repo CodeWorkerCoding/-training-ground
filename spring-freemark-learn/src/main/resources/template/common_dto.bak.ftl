@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
-* ${classDesc}
 * @author fujianjian
+* @project ${projectName}
 * @date 2018/1/2 18:50
 */
 @Data
@@ -15,9 +15,9 @@ public class ${className} {
     <#list fieldList as fieldItem>
 
     /**
-    * ${fieldItem.fieldDesc}
-    * ${fieldItem.necessary.desc}
+    * ${fieldItem.fieldComment}
+    * ${fieldItem.need}
     */
-    private ${fieldItem.fieldType.appearType} ${fieldItem.fieldName};
+    private ${fieldItem.fieldType} ${fieldItem.fieldName};
     </#list>
 }

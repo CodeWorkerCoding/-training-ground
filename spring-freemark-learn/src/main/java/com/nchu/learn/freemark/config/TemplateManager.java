@@ -1,5 +1,6 @@
 package com.nchu.learn.freemark.config;
 
+import com.nchu.learn.freemark.model.CommonEnity;
 import com.nchu.learn.freemark.model.DemoDo;
 import com.nchu.learn.freemark.model.FieldDo;
 import freemarker.template.Configuration;
@@ -36,6 +37,15 @@ public class TemplateManager implements InitializingBean {
         String demoTemp = FreeMarkerTemplateUtils.processTemplateIntoString(template, demo);
         log.info("temp: {}", demoTemp);
     }
+
+    public String genEnityCode(CommonEnity commonEnity) throws Exception {
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
+        cfg.setClassForTemplateLoading(TemplateManager.class, "/template");
+        Template template = cfg.getTemplate("common_dto.ftl");
+        String demoTemp = FreeMarkerTemplateUtils.processTemplateIntoString(template, commonEnity);
+        return demoTemp;
+    }
+
 
     private void DTOClassTemp() throws Exception {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
