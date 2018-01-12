@@ -46,10 +46,23 @@
 
         <!--<table tableName="sm_fund" domainObjectName="Fund"/>-->
 
-        <table tableName="sm_fund_withhold_info" domainObjectName="WithHoldInfo"
+        <!--<table tableName="sm_fund_withhold_info" domainObjectName="WithHoldInfo"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+        <table tableName="nchu_gen_class_model" domainObjectName="CommonEnity"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false"/>
+
+        <table tableName="nchu_gen_field_model" domainObjectName="CommonField"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+
+
     </context>
 </generatorConfiguration>

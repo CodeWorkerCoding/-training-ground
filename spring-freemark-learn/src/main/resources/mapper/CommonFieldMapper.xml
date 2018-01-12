@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.learn.mybatis.mapper.CommonFieldMapper">
+  <resultMap id="BaseResultMap" type="com.nchu.learn.freemark.model.CommonField">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_desc" jdbcType="VARCHAR" property="fieldDesc" />
+    <result column="field_type" jdbcType="VARCHAR" property="fieldType" />
+    <result column="necessary" jdbcType="VARCHAR" property="necessary" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, class_id, field_name, field_desc, field_type, necessary, created_time, modified_time, 
+    creater, updater
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nchu_gen_field_model
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nchu_gen_field_model
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.nchu.learn.mybatis.model.CommonField">
+    insert into nchu_gen_field_model (id, class_id, field_name, 
+      field_desc, field_type, necessary, 
+      created_time, modified_time, creater, 
+      updater)
+    values (#{id,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR}, 
+      #{fieldDesc,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{necessary,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
+      #{updater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonField">
+    insert into nchu_gen_field_model
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="fieldDesc != null">
+        field_desc,
+      </if>
+      <if test="fieldType != null">
+        field_type,
+      </if>
+      <if test="necessary != null">
+        necessary,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="modifiedTime != null">
+        modified_time,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDesc != null">
+        #{fieldDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null">
+        #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="necessary != null">
+        #{necessary,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nchu.learn.freemark.model.CommonField">
+    update nchu_gen_field_model
+    <set>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="fieldName != null">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDesc != null">
+        field_desc = #{fieldDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldType != null">
+        field_type = #{fieldType,jdbcType=VARCHAR},
+      </if>
+      <if test="necessary != null">
+        necessary = #{necessary,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nchu.learn.freemark.model.CommonField">
+    update nchu_gen_field_model
+    set class_id = #{classId,jdbcType=INTEGER},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_desc = #{fieldDesc,jdbcType=VARCHAR},
+      field_type = #{fieldType,jdbcType=VARCHAR},
+      necessary = #{necessary,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      creater = #{creater,jdbcType=VARCHAR},
+      updater = #{updater,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
