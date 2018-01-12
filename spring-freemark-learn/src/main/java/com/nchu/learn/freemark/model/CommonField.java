@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonField {
+public class CommonField extends BaseEnity {
 
     private String fieldName;
 

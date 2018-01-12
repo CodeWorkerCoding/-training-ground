@@ -1,5 +1,6 @@
 package com.nchu.learn.freemark.model;
 
+import com.nchu.learn.freemark.model.enums.ProjectEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,14 +16,15 @@ import java.util.List;
  * @date 2018/1/8 15:12
  */
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommonEnity {
+public class CommonEnity extends  BaseEnity {
 
     private String className;
 
     private String classDesc;
+
+    private ProjectEnum projectName;
 
     private String packageName;
 
