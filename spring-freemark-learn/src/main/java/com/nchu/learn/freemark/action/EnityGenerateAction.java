@@ -30,6 +30,10 @@ public class EnityGenerateAction {
     @Autowired
     private TemplateManager templateManager;
 
+    @GetMapping("list")
+    public String genModeleList() {
+        return "enity/genModelList";
+    }
 
     @GetMapping("before/gen")
     public String generatePage(ModelMap model) {
