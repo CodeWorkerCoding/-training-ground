@@ -5,6 +5,7 @@ import com.nchu.learn.freemark.config.TemplateManager;
 import com.nchu.learn.freemark.model.CommonEnity;
 import com.nchu.learn.freemark.model.enums.FieldTypeEnum;
 import com.nchu.learn.freemark.model.enums.NecessaryEnum;
+import com.nchu.learn.freemark.service.CommonEnityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author fujianjian
@@ -30,9 +33,19 @@ public class EnityGenerateAction {
     @Autowired
     private TemplateManager templateManager;
 
+    @Autowired
+    private CommonEnityService commonEnityService;
+
+
     @GetMapping("list")
     public String genModeleList() {
         return "enity/genModelList";
+    }
+
+    @GetMapping("list/data")
+    public @ResponseBody List<CommonEnity> obtainPageData(Map<String, Object> param) {
+        List<CommonEnity> commonEnityList = this.commonEnityService.findAllList();
+        return commonEnityList;
     }
 
     @GetMapping("before/gen")
@@ -48,6 +61,12 @@ public class EnityGenerateAction {
         String genCode = this.templateManager.genEnityCode(commonEnity);
         log.info("{}", genCode);
         return genCode;
+    }
+
+    @PostMapping("save/model")
+    public String saveGenModel(CommonEnity commonEnity) {
+        this.commonEnityService.create(commonEnity);
+        return "redirect:/enity/list";
     }
 
 }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nchu.learn.mybatis.mapper.CommonEnityMapper">
+<mapper namespace="com.nchu.learn.freemark.repo.CommonEnityRepo">
   <resultMap id="BaseResultMap" type="com.nchu.learn.freemark.model.CommonEnity">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="class_desc" jdbcType="VARCHAR" property="classDesc" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="package_name" jdbcType="VARCHAR" property="packageName" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+    <result column="created_time" jdbcType="BIGINT" property="createdTime" />
+    <result column="modified_time" jdbcType="BIGINT" property="modifiedTime" />
     <result column="creater" jdbcType="VARCHAR" property="creater" />
     <result column="updater" jdbcType="VARCHAR" property="updater" />
   </resultMap>
@@ -22,16 +22,22 @@
     from nchu_gen_class_model
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from nchu_gen_class_model
+--         where id = #{id,jdbcType=INTEGER}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from nchu_gen_class_model
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonEnity">
-    insert into nchu_gen_class_model (id, class_name, class_desc, 
+    insert into nchu_gen_class_model (class_name, class_desc,
       project_name, package_name, created_time, 
       modified_time, creater, updater
       )
-    values (#{id,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR}, 
+    values (#{className,jdbcType=VARCHAR}, #{classDesc,jdbcType=VARCHAR},
       #{projectName,jdbcType=VARCHAR}, #{packageName,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
       #{modifiedTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}
       )
@@ -39,9 +45,6 @@
   <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonEnity">
     insert into nchu_gen_class_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
       <if test="className != null">
         class_name,
       </if>
@@ -68,9 +71,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="className != null">
         #{className,jdbcType=VARCHAR},
       </if>

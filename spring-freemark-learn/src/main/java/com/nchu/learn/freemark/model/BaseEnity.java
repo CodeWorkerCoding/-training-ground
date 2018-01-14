@@ -14,9 +14,9 @@ public abstract class BaseEnity {
 
     private Integer id;
 
-    private Date createdTime;
+    private Long createdTime;
 
-    private Date modifiedTime;
+    private Long modifiedTime;
 
     private String creater;
 

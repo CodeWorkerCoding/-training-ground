@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nchu.learn.mybatis.mapper.CommonFieldMapper">
+<mapper namespace="com.nchu.learn.freemark.repo.CommonFieldRepo">
   <resultMap id="BaseResultMap" type="com.nchu.learn.freemark.model.CommonField">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="class_id" jdbcType="INTEGER" property="classId" />
@@ -8,8 +8,8 @@
     <result column="field_desc" jdbcType="VARCHAR" property="fieldDesc" />
     <result column="field_type" jdbcType="VARCHAR" property="fieldType" />
     <result column="necessary" jdbcType="VARCHAR" property="necessary" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+    <result column="created_time" jdbcType="BIGINT" property="createdTime" />
+    <result column="modified_time" jdbcType="BIGINT" property="modifiedTime" />
     <result column="creater" jdbcType="VARCHAR" property="creater" />
     <result column="updater" jdbcType="VARCHAR" property="updater" />
   </resultMap>
@@ -27,7 +27,7 @@
     delete from nchu_gen_field_model
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nchu.learn.mybatis.model.CommonField">
+  <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonField">
     insert into nchu_gen_field_model (id, class_id, field_name, 
       field_desc, field_type, necessary, 
       created_time, modified_time, creater, 
