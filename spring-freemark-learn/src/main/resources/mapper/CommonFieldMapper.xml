@@ -27,17 +27,29 @@
     delete from nchu_gen_field_model
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonField">
-    insert into nchu_gen_field_model (id, class_id, field_name, 
+  <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonField" useGeneratedKeys="true" keyProperty="id">
+    insert into nchu_gen_field_model (class_id, field_name,
       field_desc, field_type, necessary, 
       created_time, modified_time, creater, 
       updater)
-    values (#{id,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR}, 
+    values (#{classId,jdbcType=INTEGER}, #{fieldName,jdbcType=VARCHAR},
       #{fieldDesc,jdbcType=VARCHAR}, #{fieldType,jdbcType=VARCHAR}, #{necessary,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, 
       #{updater,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonField">
+  <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    insert into nchu_gen_field_model (class_id, field_name,
+    field_desc, field_type, necessary,
+    created_time, modified_time, creater,
+    updater) values
+     <foreach collection="recordList" item="record" separator=",">
+       (#{record.classId,jdbcType=INTEGER}, #{record.fieldName,jdbcType=VARCHAR},
+       #{record.fieldDesc,jdbcType=VARCHAR}, #{record.fieldType,jdbcType=VARCHAR}, #{record.necessary,jdbcType=VARCHAR},
+       #{record.createdTime,jdbcType=TIMESTAMP}, #{record.modifiedTime,jdbcType=TIMESTAMP}, #{record.creater,jdbcType=VARCHAR},
+       #{record.updater,jdbcType=VARCHAR})
+     </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonField" useGeneratedKeys="true" keyProperty="id">
     insert into nchu_gen_field_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -104,6 +116,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.nchu.learn.freemark.model.CommonField">
     update nchu_gen_field_model
     <set>
