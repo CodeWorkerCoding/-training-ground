@@ -32,7 +32,7 @@
     delete from nchu_gen_class_model
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonEnity">
+  <insert id="insert" parameterType="com.nchu.learn.freemark.model.CommonEnity" useGeneratedKeys="true" keyProperty="id">
     insert into nchu_gen_class_model (class_name, class_desc,
       project_name, package_name, created_time, 
       modified_time, creater, updater
@@ -42,7 +42,7 @@
       #{modifiedTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{updater,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonEnity">
+  <insert id="insertSelective" parameterType="com.nchu.learn.freemark.model.CommonEnity" useGeneratedKeys="true" keyProperty="id">
     insert into nchu_gen_class_model
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="className != null">
