@@ -51,13 +51,19 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
-        <table tableName="nchu_gen_class_model" domainObjectName="CommonEnity"
+        <!--<table tableName="nchu_gen_class_model" domainObjectName="CommonEnity"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false"/>
 
         <table tableName="nchu_gen_field_model" domainObjectName="CommonField"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>-->
+
+        <table tableName="sm_fund_bills" domainObjectName="Bill"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

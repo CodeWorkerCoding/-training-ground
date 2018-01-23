@@ -54,6 +54,7 @@ public class CommonEnityServiceImpl implements CommonEnityService {
 
     @Override
     public List<CommonEnity> findAllList() {
-        return commonEnityRepo.selectAll();
+        List<CommonEnity> list = commonEnityRepo.selectAll();
+        return list;
     }
 }

@@ -26,7 +26,6 @@
         select
         <include refid="Base_Column_List" />
         from nchu_gen_class_model
---         where id = #{id,jdbcType=INTEGER}
     </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from nchu_gen_class_model
