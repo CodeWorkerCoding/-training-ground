@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模型列表</title>
+
+    <!--<link rel="stylesheet" href="../../bootstrap/css/bootstrap-table.min.css">-->
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap-table/bootstrap-table.min.js"></script>
+
+
+</head>
+<body>
+<div class="container-fluid">
+    <table data-toggle="table"
+           data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=1"
+           data-sort-name="stargazers_count"
+           data-sort-order="asc">
+        <thead>
+        <tr>
+            <th data-field="name"
+                data-sortable="true">
+                Name
+            </th>
+            <th data-field="stargazers_count"
+                data-sortable="true"
+                data-sorter="starsSorter">
+                Stars
+            </th>
+            <th data-field="forks_count"
+                data-sortable="true">
+                Forks
+            </th>
+            <th data-field="description"
+                data-sortable="true">
+                Description
+            </th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+</html>
