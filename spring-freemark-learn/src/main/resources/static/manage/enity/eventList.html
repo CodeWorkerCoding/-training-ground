@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>事件表格</title>
+
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap-table/bootstrap-table.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="alert alert-success" id="eventsResult">
+        Here is the result of event.
+    </div>
+    <table id="eventsTable"
+           data-toggle="table"
+           data-height="300"
+           data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=1"
+           data-pagination="true"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+           data-toolbar="#toolbar">
+        <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="name">Name</th>
+            <th data-field="stargazers_count">Stars</th>
+            <th data-field="forks_count">Forks</th>
+            <th data-field="description">Description</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        var $result = $('#eventsResult');
+
+        $('#eventsTable').on('all.bs.table', function (e, name, args) {
+            console.log('Event:', name, ', data:', args);
+        })
+            .on('click-row.bs.table', function (e, row, $element) {
+                $result.text('Event: click-row.bs.table');
+            })
+            .on('dbl-click-row.bs.table', function (e, row, $element) {
+                $result.text('Event: dbl-click-row.bs.table');
+            })
+            .on('sort.bs.table', function (e, name, order) {
+                $result.text('Event: sort.bs.table');
+            })
+            .on('check.bs.table', function (e, row) {
+                $result.text('Event: check.bs.table');
+            })
+            .on('uncheck.bs.table', function (e, row) {
+                $result.text('Event: uncheck.bs.table');
+            })
+            .on('check-all.bs.table', function (e) {
+                $result.text('Event: check-all.bs.table');
+            })
+            .on('uncheck-all.bs.table', function (e) {
+                $result.text('Event: uncheck-all.bs.table');
+            })
+            .on('load-success.bs.table', function (e, data) {
+                $result.text('Event: load-success.bs.table');
+            })
+            .on('load-error.bs.table', function (e, status) {
+                $result.text('Event: load-error.bs.table');
+            })
+            .on('column-switch.bs.table', function (e, field, checked) {
+                $result.text('Event: column-switch.bs.table');
+            })
+            .on('page-change.bs.table', function (e, number, size) {
+                $result.text('Event: page-change.bs.table');
+            })
+            .on('search.bs.table', function (e, text) {
+                $result.text('Event: search.bs.table');
+            });
+    });
+</script>
+</html>
