@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>详情表格</title>
+
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap-table/bootstrap-table.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <table id="table">
+        <thead>
+        <tr>
+            <th data-field="name">Name</th>
+            <th data-field="stargazers_count">Stars</th>
+            <th data-field="forks_count">Forks</th>
+            <th data-field="description">Description</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+<script type="text/javascript">
+    var $table = $('#table');
+
+    $(function () {
+        buildTable($table, 8, 1);
+    });
+
+    function expandTable($detail, cells) {
+        buildTable($detail.html('<table></table>').find('table'), cells, 1);
+    }
+
+    function buildTable($el, cells, rows) {
+        var i, j, row,
+            columns = [],
+            data = [];
+
+        for (i = 0; i < cells; i++) {
+            columns.push({
+                field: 'field' + i,
+                title: 'Cell' + i,
+                sortable: true
+            });
+        }
+        for (i = 0; i < rows; i++) {
+            row = {};
+            for (j = 0; j < cells; j++) {
+                row['field' + j] = 'Row-' + i + '-' + j;
+            }
+            data.push(row);
+        }
+        $el.bootstrapTable({
+            columns: columns,
+            data: data,
+            detailView: cells > 1,
+            onExpandRow: function (index, row, $detail) {
+                expandTable($detail, cells - 1);
+            }
+        });
+    }
+</script>
+</html>
