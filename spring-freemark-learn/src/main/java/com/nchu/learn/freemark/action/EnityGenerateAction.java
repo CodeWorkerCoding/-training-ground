@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @Controller
 @Slf4j
-@RequestMapping("/enity/")
+@RequestMapping("/genEnity/")
 public class EnityGenerateAction {
 
     @Autowired

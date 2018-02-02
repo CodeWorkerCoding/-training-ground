@@ -1,4 +1,4 @@
-package com.nchu.learn.freemark.model;
+package com.nchu.learn.freemark.model.dto;
 
 import lombok.Builder;
 import lombok.Data;

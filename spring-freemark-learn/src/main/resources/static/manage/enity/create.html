@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <title>新增一个模型</title>
+
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap-table/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.min.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap-table/bootstrap-table.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1 class="page-header">新增实体模型</h1>
+    <form class="form-horizontal" name="genCodeForm" action="/enity/save/model" method="post" id="genCodeForm">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="projectName">项目名称</label>
+            <div class="col-sm-4">
+                <select name="projectName" id="projectName" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="packageName">包名</label>
+            <div class="col-sm-4">
+                <input type="text" id="packageName" name="packageName" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="className">类名</label>
+            <div class="col-sm-4">
+                <input type="text" id="className" name="className" class="form-control" data-toggle="tooltip" data-placement="right" title="必填"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="classDesc">描述</label>
+            <div class="col-sm-4">
+                <input type="text" id="classDesc" name="classDesc" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="fieldList">字段</label>
+            <div class="col-sm-10" id="fieldList">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-primary" id="submitInfo">提交</button>
+                <button type="button" class="btn btn-primary" id="addField">加字段</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="viewGenCodeRusult()">预览结果</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    let index = 1, typeOption=`<option value="">请选择字段类型</option>`, necessaryOption=`<option value="">是否必填</option>`
+        , projectOption = `<option value="">请选择项目</option>`;
+    $.get('../../meta/field/type', function (res) {
+        let {data} = res;
+        data.forEach(function (item) {
+            typeOption += `<option value="${item.value}">${item.text}</option>`;
+        });
+    });
+    $.get('../../meta/field/necessary', function (res) {
+        let {data} = res;
+        data.forEach(function (item) {
+            necessaryOption += `<option value="${item.value}">${item.text}</option>`;
+        });
+    });
+    $.get('../../meta/enity/project', function (res) {
+        let {data} = res;
+        data.forEach(function (item) {
+            projectOption += `<option value="${item.value}">${item.text}</option>`;
+        });
+        $('#projectName').append(projectOption);
+    });
+    $('#addField').bind('click', function () {
+        let dom = `<div class="form-group field-contents">
+                        <div class="col-sm-2">
+                            <input type="text" name="fieldList[${index}].fieldName" placeholder="字段名" class="form-control"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="fieldList[${index}].fieldDesc" placeholder="字段描述" class="form-control"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="fieldList[${index}].fieldType" placeholder="字段类型" class="form-control">
+                                ${typeOption}
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="fieldList[${index}].necessary" placeholder="是否必要" class="form-control">
+                                ${necessaryOption}
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button onclick="deleteField(this)" class="btn btn-danger btn-sm">删除</button>
+                        </div>
+                    </div>`;
+        $('#fieldList').append(dom);
+        index++;
+    });
+
+    //删除
+    function deleteField(obj) {
+        $(obj).parents('.field-contents').remove();
+    }
+
+    $.fn.serializeObject = function() {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+    //提交
+    $('#submitInfo').bind('click', function () {
+        let formData = $('#genCodeForm').serializeObject();
+        console.log(formData);
+        $.ajax({
+            type:'POST',
+            url:'../../enity/create',
+            data: formData,
+            success: function (res) {
+                console(res);
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -63,7 +63,12 @@
                enableSelectByExample="false"
                enableUpdateByExample="false"/>-->
 
-        <table tableName="sm_fund_bills" domainObjectName="Bill"
+        <table tableName="sm_fund_ssqain_sign_record" domainObjectName="SSQianSignRecord"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+        <table tableName="sm_fund_thirdpart_attach" domainObjectName="ThirdPartAttach"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

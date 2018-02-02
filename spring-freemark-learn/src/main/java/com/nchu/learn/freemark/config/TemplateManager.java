@@ -2,7 +2,7 @@ package com.nchu.learn.freemark.config;
 
 import com.nchu.learn.freemark.model.CommonEnity;
 import com.nchu.learn.freemark.model.DemoDo;
-import com.nchu.learn.freemark.model.FieldDo;
+import com.nchu.learn.freemark.model.dto.FieldDo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
