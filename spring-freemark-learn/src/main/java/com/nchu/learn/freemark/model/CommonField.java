@@ -1,8 +1,5 @@
 package com.nchu.learn.freemark.model;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.nchu.learn.freemark.model.enums.FieldTypeEnum;
 import com.nchu.learn.freemark.model.enums.NecessaryEnum;
 import lombok.AllArgsConstructor;
@@ -22,6 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommonField extends BaseEnity {
+
+    private Integer classId;
 
     private String fieldName;
 

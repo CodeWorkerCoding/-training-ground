@@ -21,7 +21,7 @@
 <body>
 <div class="container-fluid">
     <h1 class="page-header">新增实体模型</h1>
-    <form class="form-horizontal" name="genCodeForm" action="/enity/save/model" method="post" id="genCodeForm">
+    <form class="form-horizontal" name="genCodeForm" action="../../enity/create" method="post" id="genCodeForm">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="projectName">项目名称</label>
             <div class="col-sm-4">
@@ -54,7 +54,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-primary" id="submitInfo">提交</button>
+                <button type="button" class="btn btn-primary" id="submitEnityConfig">提交</button>
                 <button type="button" class="btn btn-primary" id="addField">加字段</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" onclick="viewGenCodeRusult()">预览结果</button>
             </div>
@@ -63,7 +63,7 @@
 </div>
 
 <script type="text/javascript">
-    let index = 1, typeOption=`<option value="">请选择字段类型</option>`, necessaryOption=`<option value="">是否必填</option>`
+    let index = 0, typeOption=`<option value="">请选择字段类型</option>`, necessaryOption=`<option value="">是否必填</option>`
         , projectOption = `<option value="">请选择项目</option>`;
     $.get('../../meta/field/type', function (res) {
         let {data} = res;
@@ -131,7 +131,7 @@
         return o;
     };
     //提交
-    $('#submitInfo').bind('click', function () {
+    $('#submitEnityConfig').bind('click', function () {
         let formData = $('#genCodeForm').serializeObject();
         console.log(formData);
         $.ajax({

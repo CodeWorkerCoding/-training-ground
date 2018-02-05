@@ -25,4 +25,14 @@ public abstract class CommonAction {
      */
     protected final static String PAGESIZE = "20";
 
+    protected final static Integer S200 = 200;
+    protected final static Integer F400 = 400;
+    protected final static Integer F401 = 401;
+    protected final static Integer F403 = 403;
+    protected final static Integer F404 = 404;
+    protected final static Integer F500 = 500;
+
+    protected final static String S_MSG = "处理成功";
+    protected final static String F_MSG = "处理失败";
+
 }

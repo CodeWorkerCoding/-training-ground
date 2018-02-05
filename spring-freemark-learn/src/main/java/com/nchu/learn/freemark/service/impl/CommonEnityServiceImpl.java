@@ -2,8 +2,10 @@ package com.nchu.learn.freemark.service.impl;
 
 import com.nchu.learn.freemark.middle.UserContext;
 import com.nchu.learn.freemark.model.CommonEnity;
+import com.nchu.learn.freemark.model.CommonField;
 import com.nchu.learn.freemark.repo.CommonEnityRepo;
 import com.nchu.learn.freemark.service.CommonEnityService;
+import com.nchu.learn.freemark.service.CommonFieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class CommonEnityServiceImpl implements CommonEnityService {
     @Autowired
     private CommonEnityRepo commonEnityRepo;
 
+    @Autowired
+    private CommonFieldService commonFieldService;
+
     @Override
     public CommonEnity findById(Integer primaryKey) {
         return this.commonEnityRepo.selectByPrimaryKey(primaryKey);
@@ -33,7 +38,14 @@ public class CommonEnityServiceImpl implements CommonEnityService {
         } else {
             record.setCreater(UserContext.getUserName());
         }
-        this.commonEnityRepo.insertSelective(record);
+        int enityId = this.commonEnityRepo.insertSelective(record);
+        List<CommonField> fieldList = record.getFieldList();
+        if (fieldList != null || fieldList.isEmpty()) {
+            fieldList.forEach(item -> {
+                item.setClassId(enityId);
+                commonFieldService.create(item);
+            });
+        }
         return record;
     }
 

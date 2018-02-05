@@ -2,7 +2,9 @@ package com.nchu.learn.freemark.action;
 
 import com.nchu.learn.freemark.model.CommonEnity;
 import com.nchu.learn.freemark.model.dto.PageRespDo;
+import com.nchu.learn.freemark.service.CommonEnityService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -14,6 +16,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/enity/")
 public class EnityAction extends CommonAction {
+
+    @Autowired
+    private CommonEnityService commonEnityService;
 
 
     @GetMapping("list")
@@ -28,7 +33,9 @@ public class EnityAction extends CommonAction {
 
     @PostMapping("create")
     public PageRespDo createEnity(CommonEnity commonEnity) {
-        return null;
+        PageRespDo.PageRespDoBuilder respBuilder = PageRespDo.builder();
+        this.commonEnityService.create(commonEnity);
+        respBuilder.code(S200).msg(S_MSG);
+        return respBuilder.build();
     }
-
 }

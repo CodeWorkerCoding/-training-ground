@@ -28,7 +28,7 @@ public class MetaAction {
         Set<OptionDo> fieldTypeList = Sets.newHashSet();
         OptionDo.OptionDoBuilder optionBuild = OptionDo.builder();
         for (FieldTypeEnum fieldTypeEnum : FieldTypeEnum.values()) {
-            optionBuild.value(fieldTypeEnum.getPackagePath()).text(fieldTypeEnum.getAppearType());
+            optionBuild.value(fieldTypeEnum.name()).text(fieldTypeEnum.getAppearType());
             fieldTypeList.add(optionBuild.build());
         }
         PageRespDo.PageRespDoBuilder respBuilder = PageRespDo.builder();
