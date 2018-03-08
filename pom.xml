@@ -25,6 +25,8 @@
         <module>mybatis-generator</module>
         <!--<module>spring-hessian-learn</module>-->
         <module>spring-freemark-learn</module>
+        <!--netty 学习研究项目-->
+        <module>netty-stu</module>
     </modules>
 
     <parent>
