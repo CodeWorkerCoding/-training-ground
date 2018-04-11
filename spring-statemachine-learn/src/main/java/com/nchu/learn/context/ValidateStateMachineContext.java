@@ -1,7 +1,6 @@
 package com.nchu.learn.context;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.StaticListableBeanFactory;
 import org.springframework.core.task.SyncTaskExecutor;
@@ -39,9 +38,9 @@ public class ValidateStateMachineContext {
         builder.configureStates()
                 .withStates()
                 .initial("A")
-                .end("D")
+                .end("D");
                 //.states(Sets.newHashSet("A", "B", "B1", "B2", "B3", "C", "C1", "C2", "D"))
-                .states(Sets.newHashSet("A", "B", "C", "D"));
+                //.states(Sets.newHashSet("A", "B", "C", "D"));
                 //.and().withStates()
                 //.parent("B")
                 //.initial("B1")
