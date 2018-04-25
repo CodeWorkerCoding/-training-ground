@@ -87,7 +87,7 @@
             <columnOverride column="apply_amt" javaType="java.util.Date"/>
             <columnOverride column="modified_time" javaType="java.util.Date"/>
         </table>-->
-        <table tableName="samp_payment_record" domainObjectName="PaymentRecord"
+        <!--<table tableName="samp_payment_record" domainObjectName="PaymentRecord"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
@@ -95,7 +95,29 @@
             <columnOverride column="payment_amt" javaType="java.lang.Double"/>
             <columnOverride column="created_time" javaType="java.util.Date"/>
             <columnOverride column="modified_time" javaType="java.util.Date"/>
+        </table>-->
 
+        <!--<table tableName="sm_fund_service_charge_config" domainObjectName="FundServiceChargeConfig"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="rate" javaType="java.lang.Double"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="update_time" javaType="java.util.Date"/>
+        </table>-->
+
+        <table tableName="sm_fund_tbj_muji" domainObjectName="TBJMuji"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="amount" javaType="java.lang.Double"/>
+            <columnOverride column="amount" javaType="java.lang.Double"/>
+            <columnOverride column="start_benefit_date" javaType="java.util.Date"/>
+            <columnOverride column="end_benefit_date" javaType="java.util.Date"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="modified_time" javaType="java.util.Date"/>
         </table>
 
 
