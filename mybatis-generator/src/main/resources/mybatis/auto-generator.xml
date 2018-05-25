@@ -107,7 +107,7 @@
             <columnOverride column="update_time" javaType="java.util.Date"/>
         </table>-->
 
-        <table tableName="sm_fund_tbj_muji" domainObjectName="TBJMuji"
+        <!--<table tableName="sm_fund_tbj_muji" domainObjectName="TBJMuji"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
@@ -118,8 +118,74 @@
             <columnOverride column="end_benefit_date" javaType="java.util.Date"/>
             <columnOverride column="create_time" javaType="java.util.Date"/>
             <columnOverride column="modified_time" javaType="java.util.Date"/>
-        </table>
+        </table>-->
 
+        <!--<table tableName="sm_fund_year_rate_config" domainObjectName="FundYearRateConfig"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="year_rate" javaType="java.lang.Double"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="update_time" javaType="java.util.Date"/>
+        </table>-->
+
+
+        <!--<table tableName="sm_fund_loan_time" domainObjectName="FundLoanTime"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="update_time" javaType="java.util.Date"/>
+        </table>
+        <table tableName="sm_fund_deposit" domainObjectName="FundDeposit"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="update_time" javaType="java.util.Date"/>
+        </table>
+        <table tableName="sm_fund_priority_period_config" domainObjectName="FundPriorityPeriodConfig"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <columnOverride column="active_start_time" javaType="java.util.Date"/>
+            <columnOverride column="active_end_time" javaType="java.util.Date"/>
+            <columnOverride column="create_time" javaType="java.util.Date"/>
+            <columnOverride column="update_time" javaType="java.util.Date"/>
+        </table>-->
+        <!--<table tableName="sm_fund_prepayment_loan" domainObjectName="PrepaymentLoan"-->
+               <!--enableCountByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--enableUpdateByExample="false">-->
+            <!--<columnOverride column="loan_amt" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="customer_clean_amt" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="customer_clean_capital" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="customer_clean_interest" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="fund_clean_amt" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="fund_clean_capital" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="fund_clean_interest" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="fund_clean_current_capital" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="fund_clean_current_interest" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="payment_actual_amount" javaType="java.lang.Double"/>-->
+            <!--<columnOverride column="customer_clean_date" javaType="java.util.Date"/>-->
+            <!--<columnOverride column="created_time" javaType="java.util.Date"/>-->
+            <!--<columnOverride column="modified_time" javaType="java.util.Date"/>-->
+            <!--<columnOverride column="sys_call_fund_clean_date" javaType="java.util.Date"/>-->
+            <!--<columnOverride column="prepayment_trial_date" javaType="java.util.Date"/>-->
+            <!--<columnOverride column="update_repay_date" javaType="java.util.Date"/>-->
+        <!--</table>-->
+
+        <table tableName="samp_data_change_record" domainObjectName="DataChangeRecord"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>
 
     </context>
 </generatorConfiguration>
