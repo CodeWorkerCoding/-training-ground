@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd">
+
+    <bean id="rabbitMQMessageLister" class="com.nchu.amqp.listener.RabbitMQMessageListener"/>
+
+    <rabbit:listener-container connection-factory="connectionFactory"
+              acknowledge="manual" concurrency="10" max-concurrency="20">
+        <rabbit:listener ref="rabbitMQMessageLister" queues="maxwellFanoutQueue"/>
+    </rabbit:listener-container>
+
+</beans>

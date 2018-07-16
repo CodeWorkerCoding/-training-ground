@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+        http://www.springframework.org/schema/rabbit
+        http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd">
+
+    <context:property-placeholder location="classpath:/application.properties"/>
+    <aop:config proxy-target-class="true"/>
+
+
+    <rabbit:connection-factory id="connectionFactory"
+        host="${spring.rabbitmq.host}"
+        port="${spring.rabbitmq.port}"
+        username="${spring.rabbitmq.username}"
+        password="${spring.rabbitmq.password}"
+        virtual-host="/"
+    />
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--common rabbit config-->
+    <!--<bean id="maxwellFanoutQueue" class="org.springframework.amqp.core.Queue">
+        <constructor-arg value="${com.nchu.rabbit.queueName}"/>
+    </bean>-->
+    <rabbit:queue id="maxwellFanoutQueue" name="${com.nchu.rabbit.queueName}"/>
+    <!--<rabbit:direct-exchange name="${com.nchu.rabbit.exchangeName}" id="directExchange" >
+        <rabbit:bindings>
+            <rabbit:binding queue="maxwellFanoutQueue" key="test" ignore-declaration-exceptions="true"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>-->
+
+    <rabbit:fanout-exchange name="${com.nchu.rabbit.exchangeName}" auto-delete="false" durable="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="maxwellFanoutQueue"/>
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+
+    <import resource="spring-amqp-consumer.xml"/>
+</beans>

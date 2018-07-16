@@ -17,16 +17,18 @@
 
     <modules>
         <!--spring 转台机学习实践-->
-        <module>spring-statemachine-learn</module>
+        <!--<module>spring-statemachine-learn</module>-->
         <!--clone from samp project-->
-        <module>clone-samp</module>
+        <!--<module>clone-samp</module>-->
         <!--boot 集成swagger2-->
         <!--<module>boot-swagger2</module>-->
         <module>mybatis-generator</module>
+        <!--spring boot 集成amqp rabbmit mq 非注解-->
+        <module>amqp-rabbit</module>
         <!--<module>spring-hessian-learn</module>-->
-        <module>spring-freemark-learn</module>
+        <!--<module>spring-freemark-learn</module>-->
         <!--netty 学习研究项目-->
-        <module>netty-stu</module>
+        <!--<module>netty-stu</module>-->
     </modules>
 
     <parent>
@@ -48,6 +50,14 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>com.alibaba</groupId>

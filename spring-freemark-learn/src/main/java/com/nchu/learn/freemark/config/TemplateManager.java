@@ -33,6 +33,7 @@ public class TemplateManager implements InitializingBean {
         DemoDo demo = DemoDo.builder().name("kevin").age(10).build();
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_26);
         cfg.setClassForTemplateLoading(TemplateManager.class, "/template");
+
         Template template = cfg.getTemplate("demo.ftl");
         String demoTemp = FreeMarkerTemplateUtils.processTemplateIntoString(template, demo);
         log.info("temp: {}", demoTemp);
